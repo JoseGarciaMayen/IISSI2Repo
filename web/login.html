@@ -1,0 +1,57 @@
+<!doctype html>
+<head>
+	<script src= "/js/utils/include.js"> </script> <!-- Para hacer includes de código HTML en esta página -->
+	<script>include("/Layout/head.html","head")</script>
+	<script src="/js/libs/bootstrap.min.js"></script>
+	<script src="/js/libs/axios.min.js"></script> <!-- Librería para llamadas AJAX -->
+	<script src="/js/login.js" type="module"></script> <!-- Control acceso público/privado -->
+	<script src="/js/header.js" type="module"></script> <!-- Control acceso público/privado -->
+	<title>Login</title>
+</head>
+<body>
+<header  class="container-fluid p-0">
+	<script>include ("/Layout/header.html", "header");</script>
+	<h4 class="text-center fw-light">
+		<i class="fa fa-sign-in"></i> Login
+	</h4>
+</header>
+<main class="container p-0">
+	<aside class= "row">
+		<div id="errors" class="form-group col-md"></div>
+	</aside>
+	<form id="login-form">
+		<section class="row">
+			<article class="col-sm">
+				<div class="form-group">
+					<label for="email">Username:</label>
+					<div class="input-group">
+						<input required type="text" class="form-control" id="username" name="username"
+							placeholder="Username">
+					</div>
+				</div>
+			</article>
+			<article class="col-sm">
+				<div class="form-group">
+					<label for="password">Password:</label>
+					<input required type="password" class="form-control" id="password" name="password"
+						placeholder="Password">
+				</div>
+			</article>
+		</section>
+
+		<section class= "row mt-2">
+			<article class="col-sm text-center">
+				<button type= "button" class= "btn btn-danger" onclick="window.location.href=`index.html`">
+					<i class="fa fa-home"></i>Cancel
+				</button>
+				<button type= "submit" class= "btn btn-primary">
+					<i class="fa fa-sign-in"></i>Login 
+				</button>
+			</article>
+			
+		</section>
+	</form>
+</main>
+<script>include ("/Layout/footer.html", "body");</script>
+</body>
+</html>

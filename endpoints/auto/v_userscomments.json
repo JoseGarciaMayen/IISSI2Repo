@@ -1,0 +1,12 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'v_userscomments'",
+        "route": "/v_userscomments",
+        "method": "GET",
+        "sql": "SELECT * FROM v_userscomments",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}

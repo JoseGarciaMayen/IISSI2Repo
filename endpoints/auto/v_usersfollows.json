@@ -1,0 +1,12 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'v_usersfollows'",
+        "route": "/v_usersfollows",
+        "method": "GET",
+        "sql": "SELECT * FROM v_usersfollows",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}

@@ -1,0 +1,75 @@
+<!doctype HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="images/favicon.ico">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/libs/bootstrap.min.js"></script>
+    <script src="js/libs/axios.min.js"></script>
+    <script src="js/utils/include.js"></script>
+
+    <title>Create a new department</title>
+</head>
+
+<body>
+    <div id="page-header"></div>
+
+    <div class="container">
+        <div class="row" id="errors"></div>
+
+        <div class="row">
+            <div class="col-md text-center">
+                <h3>Create a new department</h3>
+            </div>
+        </div>
+
+        <hr>
+
+        <form id="department-form">
+            <div class="row">
+                <div class="col-md">
+                    <div class="form-group">
+                        <label for="email">Name:</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Department name">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md">
+                    <div class="form-group">
+                        <label for="password">City:</label>
+                        <input type="text" class="form-control" id="city" name="city" placeholder="Department city">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md text-center">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </div>
+        </form>
+
+        </div>
+    </div>
+
+    <div id="page-footer"></div>
+
+    <script>
+        include("header.html", "#page-header");
+        include("footer.html", "#page-footer");
+    </script>
+
+    <script type="module" src="js/header.js"></script>
+    <script type="module" src="js/create_department.js"></script>
+
+</body>
+
+</html>

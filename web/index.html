@@ -1,0 +1,33 @@
+<!doctype html>
+
+<head>
+	<script src="/js/utils/include.js"> </script> <!-- Includes de código HTML -->
+	<script>include("Layout/head.html", "head")</script> <!-- Head común del sitio -->
+	<script src="/js/libs/bootstrap.min.js"></script>
+	<script src="js/libs/axios.min.js"></script> <!-- Librería para llamadas AJAX -->
+	<script src="js/index.js" type="module"> </script> <!-- Archivo de control .js externo -->
+	<script src="js/header.js" type="module"></script> <!-- Control acceso público/privado -->
+	<title>Tags</title>
+</head>
+
+<body>
+	<header class="container-fluid p-0">
+		<script>include("Layout/header.html", "header");</script> <!-- Cabecera del sitio -->
+		<h4 class="text-center fw-light p-0">
+			<i class="fa fa-book"></i> <span id="pageTitle">Tags</span>
+		</h4>
+	</header>
+
+	<main class="container-fluid  ps-1">
+		<aside class="row">
+			<div id="errors" class="col-sm-9 p-0"></div> <!-- Div de errores para peticiones Ajax a la API REST -->
+		</aside>
+		<section id="divGallery" class="row px-3">
+			
+		</section>
+	</main>
+	<!-- Pie del sitio -->
+	<script>include("Layout/footer.html", "body");</script>
+</body>
+
+</html>
