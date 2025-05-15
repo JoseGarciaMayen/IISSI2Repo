@@ -1,0 +1,152 @@
+
+### This is an auto-generated test suite, it needs to be completed with valid data.
+### These are not all tests you need, more of them should be created to evaluate the functional
+### requirements of your project. These tests only test the CRUD endpoints of the entity.
+### Silence is a DEAL research team project, more info about us in https://deal.us.es
+@BASE = http://127.0.0.1:8080/api/v1
+
+### Auxiliary query
+### Positive test
+### Test 00: Get all existing photos
+### This query is used in several of the below tests it should be executed first.
+# @name photos
+GET {{BASE}}/photos
+
+### Login a(n) users and save the generated token 
+### This token is used in several of the below tests it should be executed second.
+# @name login
+POST {{BASE}}/login 
+Content-Type: application/json 
+
+{ 
+	"username": ###REPLACE###,
+	"password": ###REPLACE###
+}
+
+###
+@token = {{login.response.body.sessionToken}}
+
+
+### TESTS BEGIN
+
+### Test 01: Get one existing photos by its id.
+### positive test 
+@phoId = {{photos.response.body.0.photoId}}
+GET {{BASE}}/photos/{{phoId}} 
+Content-Type: application/json 
+
+
+### Test 02: Try get one existing photos by its nonexistent id.
+### negative test 
+GET {{BASE}}/photos/999999999
+Content-Type: application/json 
+
+
+### Test 03: Add a new photos successfully
+### Positive test 
+### We assume that the token has been aquired by the login request.
+# @name newphotos
+POST {{BASE}}/photos 
+Content-Type: application/json 
+Token: {{token}} 
+
+{
+	"title": ###REPLACE###,
+	"description": ###REPLACE###,
+	"date": ###REPLACE###,
+	"url": ###REPLACE###,
+	"visibility": ###REPLACE###,
+	"userId": ###REPLACE###
+} 
+
+### Check the created photos
+
+@newphotosid = {{newphotos.response.body.lastId}}
+GET {{BASE}}/photos/{{newphotosid}}
+Content-Type: application/json 
+
+### Test 04: Add a new photos without a session token
+### Negative test 
+POST {{BASE}}/photos 
+Content-Type: application/json 
+
+{ 
+	"title": ###REPLACE###,
+	"description": ###REPLACE###,
+	"date": ###REPLACE###,
+	"url": ###REPLACE###,
+	"visibility": ###REPLACE###,
+	"userId": ###REPLACE###
+}
+
+### Test 05: Modify an existing photos 
+### Positive test 
+@phoId = {{photos.response.body.0.photoId}} 
+PUT {{BASE}}/photos/{{phoId}} 
+Content-Type: application/json 
+Token: {{token}} 
+
+{ 
+	"title": ###REPLACE###,
+	"description": ###REPLACE###,
+	"date": ###REPLACE###,
+	"url": ###REPLACE###,
+	"visibility": ###REPLACE###,
+	"userId": ###REPLACE###
+}
+
+### Check the modified photos
+
+GET {{BASE}}/photos/{{newphotosid}}
+Content-Type: application/json 
+
+### Test 06: Try to modify an existing photos without a session token
+### Negative test
+@phoId = {{photos.response.body.0.photoId}}
+PUT {{BASE}}/photos/{{phoId}}
+Content-Type: application/json
+
+{
+	"title": ###REPLACE###,
+	"description": ###REPLACE###,
+	"date": ###REPLACE###,
+	"url": ###REPLACE###,
+	"visibility": ###REPLACE###,
+	"userId": ###REPLACE###
+}
+
+### Test 07: Delete an existing photos
+### Positive test
+
+### Create a new photos, which we will delete
+# @name createdphoToDelete
+POST {{BASE}}/photos
+Content-Type: application/json
+Token: {{token}}
+
+{
+	"title": ###REPLACE###,
+	"description": ###REPLACE###,
+	"date": ###REPLACE###,
+	"url": ###REPLACE###,
+	"visibility": ###REPLACE###,
+	"userId": ###REPLACE###
+}
+
+### Check the created photos
+@phodelId = {{createdphoToDelete.response.body.lastId}}
+GET {{BASE}}/photos/{{phodelId}}
+Content-Type: application/json 
+
+### Delete the photos
+DELETE {{BASE}}/photos/{{phodelId}}
+Token: {{token}}
+
+### Check the deleted photos
+GET {{BASE}}/photos/{{phodelId}}
+Content-Type: application/json 
+
+### Test 08: Try to delete a photos without a session token
+### Negative test
+DELETE {{BASE}}/photos/{{phoId}}
+

@@ -1,0 +1,148 @@
+/* * {
+    transition: all 1s;
+}
+
+*:hover{
+    transform: rotate(720deg);
+}
+*/
+body {
+    background-color: #cccccc;
+}
+
+body.dark {
+    background-color: #222222;
+    color: #eeeeee;
+}
+
+.photo-block {
+    text-align: center;
+    background-color: white;
+    border-radius: 15px;
+    margin: 25px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 30px;
+    transition: all 0.3s;
+
+    .photo-image {
+        filter: grayscale(1);
+        transition: all 0.3s;
+    }
+}
+
+.photo-block:hover {
+    transform: translateY(20px);
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 0px;
+
+    .photo-image {
+        filter: grayscale(0);
+    }
+}
+
+body.dark .photo-block {
+    background-color: #444444;
+}
+
+.photo-title {
+    font-size: 140%;
+    font-family: Arial;
+    text-decoration: underline;
+}
+
+.photo-score {
+    font-family: 130%;
+    font-family: monospace;
+}
+
+.photo-image {
+    width: 100%;
+    height: auto;
+}
+
+.photo-edit-block {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+
+    button {
+        font-size: larger;
+        background-color: #dddddd;
+        width: 50%;
+        height: 40px;
+        border: none;
+        display: inline-block;
+        transition: all 0.3s;
+    }
+
+    button:hover {
+        background-color: #bbbbbb;
+    }
+}
+
+.photo-metadata-block {
+    margin-bottom: 40px;
+}
+
+.gallery-container {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+}
+
+input,
+select {
+    background-color: #666666;
+    border-color: #999999;
+    color: white;
+}
+
+.input-group>label {
+    display: block;
+}
+
+.input-group {
+    margin-bottom: 0.5em;
+}
+
+div.title-block {
+    text-align: center;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    background-color: #333333;
+}
+
+#title {
+    font-size: 300%;
+    text-decoration: none;
+    color: white;
+    font-family: sans-serif;
+    margin-bottom: 0;
+    transition: all 0.3s;
+}
+
+#title:hover {
+    text-shadow: white 0 0 4px, fuchsia 0 0 25px;
+}
+
+#subtitle {
+    font-size: 120%;
+    font-style: italic;
+    color: #bbbbbb;
+    font-family: monospace;
+}
+
+div.navigation>a {
+    color: white;
+    font-size: 120%;
+    background-color: #555555;
+    font-family: monospace;
+    text-decoration: none;
+    display: inline-block;
+    min-width: 150px;
+}
+
+img.photo-user-avatar {
+    max-width: 25px;
+    height: auto;
+    border-radius: 50%;
+    }

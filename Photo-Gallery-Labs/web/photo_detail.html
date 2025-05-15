@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Example page</title>
+    <link rel="icon" href="/images/favicon.ico" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <script src="/js/libs/bootstrap.min.js"></script>
+    <script src="js/libs/axios.min.js"></script>
+    <script src="/js/utils/include.js"></script>
+    <script src="/js/photo_detail.js" type="module"></script>
+    <script src="/js/header.js" type="module"></script>
+</head>
+
+<body class="">
+    <div id="page-header"></div>
+    <div id="errors"></div>
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-9" id="photo-details-column"></div>
+
+            <div class="col-md-3">
+                <div>
+                    <button id="button-edit" class="btn btn-primary">Edit this photo</button>
+                    <button id="button-delete" class="btn btn-danger">Delete this photo</button>
+                </div>
+
+                <form>
+                    <div class="form-group">
+                        <label for="rating-input">Rate this photo:</label>
+                        <select id="rating-input" name="rating" class="form-control">
+                            <option value="1">*</option>
+                            <option value="2">**</option>
+                            <option value="3">***</option>
+                            <option value="4">****</option>
+                            <option value="5">*****</option>
+                        </select>
+                        <button type="submit" class="btn btn-success">Rate</button>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+        <div class="row text-center">
+            <div class="col-md-9" id="comments-column"></div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="text">Add a comment:</label>
+                    <input type="text" class="form-control" id="text-input" name="text"
+                        placeholder="Say something">
+                    </div>
+                <button type="submit" id="button-comment" class="btn btn-success">Comment</button>
+                </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-md">
+                <a href="index.html" class="btn btn-primary">Return to the gallery</a>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</body>
+
+</html>
+
+<script>
+    include("header.html", "#page-header");
+</script>

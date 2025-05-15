@@ -1,0 +1,132 @@
+
+### This is an auto-generated test suite, it needs to be completed with valid data.
+### These are not all tests you need, more of them should be created to evaluate the functional
+### requirements of your project. These tests only test the CRUD endpoints of the entity.
+### Silence is a DEAL research team project, more info about us in https://deal.us.es
+@BASE = http://127.0.0.1:8080/api/v1
+
+### Auxiliary query
+### Positive test
+### Test 00: Get all existing usersfollows
+### This query is used in several of the below tests it should be executed first.
+# @name usersfollows
+GET {{BASE}}/usersfollows
+
+### Login a(n) users and save the generated token 
+### This token is used in several of the below tests it should be executed second.
+# @name login
+POST {{BASE}}/login 
+Content-Type: application/json 
+
+{ 
+	"username": ###REPLACE###,
+	"password": ###REPLACE###
+}
+
+###
+@token = {{login.response.body.sessionToken}}
+
+
+### TESTS BEGIN
+
+### Test 01: Get one existing usersfollows by its id.
+### positive test 
+@useId = {{usersfollows.response.body.0.id}}
+GET {{BASE}}/usersfollows/{{useId}} 
+Content-Type: application/json 
+
+
+### Test 02: Try get one existing usersfollows by its nonexistent id.
+### negative test 
+GET {{BASE}}/usersfollows/999999999
+Content-Type: application/json 
+
+
+### Test 03: Add a new usersfollows successfully
+### Positive test 
+### We assume that the token has been aquired by the login request.
+# @name newusersfollows
+POST {{BASE}}/usersfollows 
+Content-Type: application/json 
+Token: {{token}} 
+
+{
+	"followerId": ###REPLACE###,
+	"followedId": ###REPLACE###
+} 
+
+### Check the created usersfollows
+
+@newusersfollowsid = {{newusersfollows.response.body.lastId}}
+GET {{BASE}}/usersfollows/{{newusersfollowsid}}
+Content-Type: application/json 
+
+### Test 04: Add a new usersfollows without a session token
+### Negative test 
+POST {{BASE}}/usersfollows 
+Content-Type: application/json 
+
+{ 
+	"followerId": ###REPLACE###,
+	"followedId": ###REPLACE###
+}
+
+### Test 05: Modify an existing usersfollows 
+### Positive test 
+@useId = {{usersfollows.response.body.0.id}} 
+PUT {{BASE}}/usersfollows/{{useId}} 
+Content-Type: application/json 
+Token: {{token}} 
+
+{ 
+	"followerId": ###REPLACE###,
+	"followedId": ###REPLACE###
+}
+
+### Check the modified usersfollows
+
+GET {{BASE}}/usersfollows/{{newusersfollowsid}}
+Content-Type: application/json 
+
+### Test 06: Try to modify an existing usersfollows without a session token
+### Negative test
+@useId = {{usersfollows.response.body.0.id}}
+PUT {{BASE}}/usersfollows/{{useId}}
+Content-Type: application/json
+
+{
+	"followerId": ###REPLACE###,
+	"followedId": ###REPLACE###
+}
+
+### Test 07: Delete an existing usersfollows
+### Positive test
+
+### Create a new usersfollows, which we will delete
+# @name createduseToDelete
+POST {{BASE}}/usersfollows
+Content-Type: application/json
+Token: {{token}}
+
+{
+	"followerId": ###REPLACE###,
+	"followedId": ###REPLACE###
+}
+
+### Check the created usersfollows
+@usedelId = {{createduseToDelete.response.body.lastId}}
+GET {{BASE}}/usersfollows/{{usedelId}}
+Content-Type: application/json 
+
+### Delete the usersfollows
+DELETE {{BASE}}/usersfollows/{{usedelId}}
+Token: {{token}}
+
+### Check the deleted usersfollows
+GET {{BASE}}/usersfollows/{{usedelId}}
+Content-Type: application/json 
+
+### Test 08: Try to delete a usersfollows without a session token
+### Negative test
+DELETE {{BASE}}/usersfollows/{{useId}}
+
