@@ -1,0 +1,58 @@
+{
+    "getById": {
+        "description": "Gets an entry from 'users' by its primary key",
+        "route": "/users/$userId",
+        "method": "GET",
+        "sql": "SELECT * FROM users WHERE userId = $userId",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'users'",
+        "route": "/users",
+        "method": "POST",
+        "sql": "INSERT INTO users (fullName, username, avatarUrl, city, age, password) VALUES ($fullName, $username, $avatarUrl, $city, $age, $password)",
+        "request_body_params": [
+            "fullName",
+            "username",
+            "avatarUrl",
+            "city",
+            "age",
+            "password"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'users' by its primary key",
+        "route": "/users/$userId",
+        "method": "PUT",
+        "sql": "UPDATE users SET fullName = $fullName, username = $username, avatarUrl = $avatarUrl, city = $city, age = $age, password = $password WHERE userId = $userId",
+        "request_body_params": [
+            "fullName",
+            "username",
+            "avatarUrl",
+            "city",
+            "age",
+            "password"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'users' by its primary key",
+        "route": "/users/$userId",
+        "method": "DELETE",
+        "sql": "DELETE FROM users WHERE userId = $userId",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}

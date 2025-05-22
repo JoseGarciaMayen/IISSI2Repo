@@ -1,0 +1,152 @@
+
+### This is an auto-generated test suite, it needs to be completed with valid data.
+### These are not all tests you need, more of them should be created to evaluate the functional
+### requirements of your project. These tests only test the CRUD endpoints of the entity.
+### Silence is a DEAL research team project, more info about us in https://deal.us.es
+@BASE = http://127.0.0.1:8081/api/v1
+
+### Auxiliary query
+### Positive test
+### Test 00: Get all existing albums
+### This query is used in several of the below tests it should be executed first.
+# @name albums
+GET {{BASE}}/albums
+
+### Login a(n) users and save the generated token 
+### This token is used in several of the below tests it should be executed second.
+# @name login
+POST {{BASE}}/login 
+Content-Type: application/json 
+
+{ 
+	"username": ###REPLACE###,
+	"password": ###REPLACE###
+}
+
+###
+@token = {{login.response.body.sessionToken}}
+
+
+### TESTS BEGIN
+
+### Test 01: Get one existing albums by its id.
+### positive test 
+@albId = {{albums.response.body.0.albumId}}
+GET {{BASE}}/albums/{{albId}} 
+Content-Type: application/json 
+
+
+### Test 02: Try get one existing albums by its nonexistent id.
+### negative test 
+GET {{BASE}}/albums/999999999
+Content-Type: application/json 
+
+
+### Test 03: Add a new albums successfully
+### Positive test 
+### We assume that the token has been aquired by the login request.
+# @name newalbums
+POST {{BASE}}/albums 
+Content-Type: application/json 
+Token: {{token}} 
+
+{
+	"userId": ###REPLACE###,
+	"title": ###REPLACE###,
+	"artist": ###REPLACE###,
+	"releaseDate": ###REPLACE###,
+	"imageUrl": ###REPLACE###,
+	"numTracks": ###REPLACE###
+} 
+
+### Check the created albums
+
+@newalbumsid = {{newalbums.response.body.lastId}}
+GET {{BASE}}/albums/{{newalbumsid}}
+Content-Type: application/json 
+
+### Test 04: Add a new albums without a session token
+### Negative test 
+POST {{BASE}}/albums 
+Content-Type: application/json 
+
+{ 
+	"userId": ###REPLACE###,
+	"title": ###REPLACE###,
+	"artist": ###REPLACE###,
+	"releaseDate": ###REPLACE###,
+	"imageUrl": ###REPLACE###,
+	"numTracks": ###REPLACE###
+}
+
+### Test 05: Modify an existing albums 
+### Positive test 
+@albId = {{albums.response.body.0.albumId}} 
+PUT {{BASE}}/albums/{{albId}} 
+Content-Type: application/json 
+Token: {{token}} 
+
+{ 
+	"userId": ###REPLACE###,
+	"title": ###REPLACE###,
+	"artist": ###REPLACE###,
+	"releaseDate": ###REPLACE###,
+	"imageUrl": ###REPLACE###,
+	"numTracks": ###REPLACE###
+}
+
+### Check the modified albums
+
+GET {{BASE}}/albums/{{newalbumsid}}
+Content-Type: application/json 
+
+### Test 06: Try to modify an existing albums without a session token
+### Negative test
+@albId = {{albums.response.body.0.albumId}}
+PUT {{BASE}}/albums/{{albId}}
+Content-Type: application/json
+
+{
+	"userId": ###REPLACE###,
+	"title": ###REPLACE###,
+	"artist": ###REPLACE###,
+	"releaseDate": ###REPLACE###,
+	"imageUrl": ###REPLACE###,
+	"numTracks": ###REPLACE###
+}
+
+### Test 07: Delete an existing albums
+### Positive test
+
+### Create a new albums, which we will delete
+# @name createdalbToDelete
+POST {{BASE}}/albums
+Content-Type: application/json
+Token: {{token}}
+
+{
+	"userId": ###REPLACE###,
+	"title": ###REPLACE###,
+	"artist": ###REPLACE###,
+	"releaseDate": ###REPLACE###,
+	"imageUrl": ###REPLACE###,
+	"numTracks": ###REPLACE###
+}
+
+### Check the created albums
+@albdelId = {{createdalbToDelete.response.body.lastId}}
+GET {{BASE}}/albums/{{albdelId}}
+Content-Type: application/json 
+
+### Delete the albums
+DELETE {{BASE}}/albums/{{albdelId}}
+Token: {{token}}
+
+### Check the deleted albums
+GET {{BASE}}/albums/{{albdelId}}
+Content-Type: application/json 
+
+### Test 08: Try to delete a albums without a session token
+### Negative test
+DELETE {{BASE}}/albums/{{albId}}
+

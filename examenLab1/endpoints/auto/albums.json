@@ -1,0 +1,68 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'albums'",
+        "route": "/albums",
+        "method": "GET",
+        "sql": "SELECT * FROM albums",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'albums' by its primary key",
+        "route": "/albums/$albumId",
+        "method": "GET",
+        "sql": "SELECT * FROM albums WHERE albumId = $albumId",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'albums'",
+        "route": "/albums",
+        "method": "POST",
+        "sql": "INSERT INTO albums (userId, title, artist, releaseDate, imageUrl, numTracks) VALUES ($userId, $title, $artist, $releaseDate, $imageUrl, $numTracks)",
+        "request_body_params": [
+            "userId",
+            "title",
+            "artist",
+            "releaseDate",
+            "imageUrl",
+            "numTracks"
+        ],
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'albums' by its primary key",
+        "route": "/albums/$albumId",
+        "method": "PUT",
+        "sql": "UPDATE albums SET userId = $userId, title = $title, artist = $artist, releaseDate = $releaseDate, imageUrl = $imageUrl, numTracks = $numTracks WHERE albumId = $albumId",
+        "request_body_params": [
+            "userId",
+            "title",
+            "artist",
+            "releaseDate",
+            "imageUrl",
+            "numTracks"
+        ],
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'albums' by its primary key",
+        "route": "/albums/$albumId",
+        "method": "DELETE",
+        "sql": "DELETE FROM albums WHERE albumId = $albumId",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}
